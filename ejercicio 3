@@ -1,0 +1,33 @@
+const mazoEspadasASCII = [
+  'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠'
+];
+
+/**
+
+ * @param {string} card 
+ * @returns {number} 
+ */
+const cardToValue = (card) => {
+  if (card.startsWith('A')) return 1;  
+  if (card.startsWith('J')) return 11;
+  if (card.startsWith('Q')) return 12;  
+  if (card.startsWith('K')) return 13;
+  return parseInt(card, 10);
+};
+
+/**
+ * @param {Array} deck
+ * @returns {boolean} 
+ */
+const isEachCardEven = (deck) => {
+  if (!Array.isArray(deck)) throw new TypeError('deck debe ser un arreglo');
+  return deck.every((card) => {
+    const value = typeof card === 'string' ? cardToValue(card) : card;
+    return value % 2 === 0;
+  });
+};
+
+// Ejemplos:
+console.log(isEachCardEven(['2♠', '4♠', '6♠', 'Q♠'])); 
+console.log(isEachCardEven(mazoEspadasASCII));        
+console.log(isEachCardEven(['A♠']));                  
