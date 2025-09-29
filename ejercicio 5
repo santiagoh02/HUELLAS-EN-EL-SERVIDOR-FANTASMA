@@ -1,0 +1,29 @@
+const mazoEspadasASCII = [
+  'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠'
+];
+
+/**
+ * @param {string|number} card 
+ * @returns {number} 
+ */
+const cardToValue = (card) => {
+  if (typeof card === 'number') return card;
+  if (card.startsWith('A')) return 1;  
+  if (card.startsWith('J')) return 11;  
+  if (card.startsWith('Q')) return 12;  
+  if (card.startsWith('K')) return 13;  
+  return parseInt(card, 10); 
+};
+
+/**
+ * @param {Array} deck 
+ * @returns {*} 
+ */
+const getFirstOddCard = (deck) => {
+  if (!Array.isArray(deck)) throw new TypeError("deck debe ser un arreglo");
+  return deck.find(card => cardToValue(card) % 2 !== 0);
+};
+
+console.log(getFirstOddCard([4, 2, 8, 7, 9]));           
+console.log(getFirstOddCard(['2♠', '4♠', 'J♠', 'Q♠']));  
+console.log(getFirstOddCard(['2♠', '4♠', 'Q♠']));      
